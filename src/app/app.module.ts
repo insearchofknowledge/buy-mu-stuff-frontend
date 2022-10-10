@@ -8,10 +8,12 @@ import { HomeComponent } from './components/home/home.component';
 
 import { ProductDtoComponent } from './components/product-dto/product-dto.component';
 import { ProductDtoService } from './services/product-dto.service';
-import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { AppService } from './services/app.service';
+import { RegisterComponent } from './components/register/register.component';
+import { UserService } from './services/user.service';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -30,21 +32,17 @@ export class XhrInterceptor implements HttpInterceptor {
     HomeComponent,
     ProductDtoComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [ProductDtoService, AppService, { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }],
+  providers: [ProductDtoService, AppService, UserService, { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-
-
-
-
-
