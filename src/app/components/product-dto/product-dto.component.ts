@@ -1,7 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CategoryDto } from 'src/app/dto/category-dto';
+import { ProducerDto } from 'src/app/dto/producer-dto';
 import { ProductDto } from 'src/app/dto/product-dto';
+import { CategoryDtoService } from 'src/app/services/category-dto.service';
+import { ProducerDtoService } from 'src/app/services/producer-dto.service';
 import { ProductDtoService } from 'src/app/services/product-dto.service';
 
 @Component({
@@ -12,23 +16,29 @@ import { ProductDtoService } from 'src/app/services/product-dto.service';
 export class ProductDtoComponent implements OnInit {
 
   public products: ProductDto[];
+  public categories:CategoryDto[];
+  public producers: ProducerDto[];
   addProductForm: FormGroup;
+  
 
-  constructor(private productDtoService: ProductDtoService) { }
-
+  constructor(private formBuilder:FormBuilder, private productDtoService: ProductDtoService, private categoryDtoService: CategoryDtoService, private producerDtoService: ProducerDtoService) { }
+  
   ngOnInit() {
     this.getProducts();
+    this.getCategories();
+    this.getProducers();
 
     this.addProductForm = new FormGroup({
-      firstName: new FormControl('', [Validators.required, Validators.nullValidator, Validators.pattern("[a-zA-Z ]*")]),
-      lastName: new FormControl('', [Validators.required, Validators.nullValidator, Validators.pattern("[a-zA-Z ]*")]),
-      email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-      password: new FormControl('', [Validators.required, Validators.pattern("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+])[A-Za-zd!@#$%^&*()_+].{8,15}")]),
-      city: new FormControl('', [Validators.required, Validators.nullValidator, Validators.pattern("[a-zA-Z ]*")]),
-      address: new FormControl('', [Validators.required, Validators.nullValidator, Validators.pattern("[a-zA-Z ]*")])
-      //"(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}"
+      name: new FormControl(''),
+      producerDto: new FormControl(''),
+      description: new FormControl(''),
+      price: new FormControl(''),
+      productType: new FormControl(''),
+      categoryDto: new FormControl('')
+      
     })
-  }
+
+}
 
   public getProducts(): void{
     this.productDtoService.getProducts()
@@ -40,14 +50,34 @@ export class ProductDtoComponent implements OnInit {
   }
 
   public onAddProduct():void{
-    // this.userService.register(this.registerForm.value).subscribe({
-    //   next:(response: string)=>{
-    //     console.log(response);
-    //   },
-    //   error:(errorResponse: HttpErrorResponse)=>{
-    //     console.log(errorResponse);
-    //   }
-    // })
+    // this.addProductForm.get("categoryDto").setValue(1)
+    // alert(this.addProductForm.value.categoryDto.name)
+    this.productDtoService.addProduct(this.addProductForm.value).subscribe({
+      next:(response: ProductDto)=>{
+        console.log(response);
+      },
+      error:(errorResponse: HttpErrorResponse)=>{
+        console.log(errorResponse);
+      }
+    })
+  }
+
+  public getCategories(): void{
+    this.categoryDtoService.getCategories()
+    .subscribe((response: CategoryDto[])=>
+    {this.categories = response;},
+    (error : HttpErrorResponse) =>{alert(error.message)
+    }
+    );
+  }
+
+  public getProducers(): void{
+    this.producerDtoService.getProducers()
+    .subscribe((response: ProducerDto[])=>
+    {this.producers = response;},
+    (error : HttpErrorResponse) =>{alert(error.message)
+    }
+    );
   }
 
 }

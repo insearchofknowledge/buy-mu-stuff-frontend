@@ -8,6 +8,6 @@ export class ProductDto {
     imageUrl: string;
     price: number;
     productType: number;
-    producerDto: ProducerDto;
+    producerDto: ProducerDto;       // producerDto holds both names for producerDto object of ProducerDto and for AddProducerDto id
     categoryDto: CategoryDto; 
 }

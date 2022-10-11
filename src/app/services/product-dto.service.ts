@@ -18,4 +18,8 @@ export class ProductDtoService {
     headers.set('Content-Type', 'application/json; charset=utf-8');
     return this.httpClient.get<ProductDto[]>('/api/products',{headers: headers});
   }
+
+  public addProduct(productDto: ProductDto): Observable<ProductDto> {
+    return this.httpClient.post<ProductDto>(`${this.apiServerUrl}/api/products`, productDto);
+  }
 }
