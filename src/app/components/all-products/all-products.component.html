@@ -1,117 +1,23 @@
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 col-xl-3">
-            <div class="card m-b-30">
-                <div class="card-body row">
-                    <div class="col-6">
-                        <a href=""><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="img-fluid rounded-circle w-60"></a>
-                    </div>
-                    <div class="col-6 card-title align-self-center mb-0">
-                        <h5>Emma A. Main</h5>
-                        <p class="m-0">Graphics Designer</p>
-                    </div>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a href="#">PaulGoyette@gmail.com</a></li>
-                    <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : 000 123-456</li>
-                </ul>
-                <div class="card-body">
-                    <div class="float-right btn-group btn-group-sm">
-                        <a href="#" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-                        <a href="#" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
-                    </div>
-                    <ul class="social-links list-inline mb-0">
-                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook-f"></i></a></li>
-                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-                    </ul>
-                </div>
+<div class="container text-center">
+    <div class="row row-cols-4" >
+      <div class="col" *ngFor ="let product of products" style="padding-top:1%; margin:0px;">
+        <div class="card" style="width: 20rem;" >
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{product.name}}</h5>
+              <p class="card-text">{{product.description}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">{{product.producerDto.name}}</li>
+              <li class="list-group-item">{{product.productType}}</li>
+              <li class="list-group-item">{{product.categoryDto.name}}</li>
+              <li class="list-group-item">{{product.price}}</li>
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
             </div>
         </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="card m-b-30">
-                <div class="card-body row">
-                    <div class="col-6">
-                        <a href=""><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" class="img-fluid rounded-circle w-60"></a>
-                    </div>
-                    <div class="col-6 card-title align-self-center mb-0">
-                        <h5>Paul L. Goyette</h5>
-                        <p class="m-0">Graphics Designer</p>
-                    </div>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a href="#">PaulGoyette@gmail.com</a></li>
-                    <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : 000 123-456</li>
-                </ul>
-                <div class="card-body">
-                    <div class="float-right btn-group btn-group-sm">
-                        <a href="#" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-                        <a href="#" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
-                    </div>
-                    <ul class="social-links list-inline mb-0">
-                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook-f"></i></a></li>
-                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="card m-b-30">
-                <div class="card-body row">
-                    <div class="col-6">
-                        <a href=""><img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" class="img-fluid rounded-circle w-60"></a>
-                    </div>
-                    <div class="col-6 card-title align-self-center mb-0">
-                        <h5>Jonathan Smith</h5>
-                        <p class="m-0">Graphics Designer</p>
-                    </div>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a href="#">PaulGoyette@gmail.com</a></li>
-                    <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : 000 123-456</li>
-                </ul>
-                <div class="card-body">
-                    <div class="float-right btn-group btn-group-sm">
-                        <a href="#" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-                        <a href="#" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
-                    </div>
-                    <ul class="social-links list-inline mb-0">
-                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook-f"></i></a></li>
-                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="card m-b-30">
-                <div class="card-body row">
-                    <div class="col-6">
-                        <a href=""><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" class="img-fluid rounded-circle w-60"></a>
-                    </div>
-                    <div class="col-6 card-title align-self-center mb-0">
-                        <h5>Lily J. Ford</h5>
-                        <p class="m-0">Graphics Designer</p>
-                    </div>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a href="#">PaulGoyette@gmail.com</a></li>
-                    <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : 000 123-456</li>
-                </ul>
-                <div class="card-body">
-                    <div class="float-right btn-group btn-group-sm">
-                        <a href="#" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-                        <a href="#" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
-                    </div>
-                    <ul class="social-links list-inline mb-0">
-                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook-f"></i></a></li>
-                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-</div>
+  </div>
