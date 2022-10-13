@@ -19,6 +19,7 @@ export class ProductDtoComponent implements OnInit {
   public categories:CategoryDto[];
   public producers: ProducerDto[];
   addProductForm: FormGroup;
+  public deleteProduct: ProductDto;
   
 
   constructor(private formBuilder:FormBuilder, private productDtoService: ProductDtoService, private categoryDtoService: CategoryDtoService, private producerDtoService: ProducerDtoService) { }
@@ -27,7 +28,12 @@ export class ProductDtoComponent implements OnInit {
     this.getProducts();
     this.getCategories();
     this.getProducers();
+    this.createForm();
 
+   
+
+}
+  public createForm():void{
     this.addProductForm = new FormGroup({
       name: new FormControl(''),
       producerDto: new FormControl(''),
@@ -37,8 +43,7 @@ export class ProductDtoComponent implements OnInit {
       categoryDto: new FormControl('')
       
     })
-
-}
+  }
 
   public getProducts(): void{
     this.productDtoService.getProducts()
@@ -55,6 +60,8 @@ export class ProductDtoComponent implements OnInit {
     this.productDtoService.addProduct(this.addProductForm.value).subscribe({
       next:(response: ProductDto)=>{
         console.log(response);
+        this.getProducts();
+        this.createForm();
       },
       error:(errorResponse: HttpErrorResponse)=>{
         console.log(errorResponse);
@@ -80,4 +87,16 @@ export class ProductDtoComponent implements OnInit {
     );
   }
 
+  public onDeleteProduct(productDtoId: number): void {
+    this.productDtoService.deleteProduct(productDtoId).subscribe(
+      (response: void) => {
+        console.log(response);
+        // this.getProducts();
+        this.ngOnInit();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
 }

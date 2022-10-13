@@ -7,6 +7,7 @@
   <th>Price</th>
   <th>Type</th>
   <th>Category</th>
+  <th>Delete</th>
 </thead>
 <tbody>
   <tr *ngFor="let product of products">
@@ -17,6 +18,7 @@
   <td>{{product.price}}</td>
   <td>{{product.productType}}</td>
   <td>{{product.categoryDto.name}}</td>
+  <td><button type="button" class="btn-close" aria-label="Delete" (click)="onDeleteProduct(product.id)"></button></td>
   </tr>
 </tbody>
 

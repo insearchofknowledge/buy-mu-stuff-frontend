@@ -1,2 +1,6 @@
-@import "~bootstrap/dist/css/bootstrap.css"
+@import "~bootstrap/dist/css/bootstrap.css";
 
+body{
+    margin-top:20px;
+    background: #d6d6d6;
+}

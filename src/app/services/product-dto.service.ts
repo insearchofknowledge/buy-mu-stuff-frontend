@@ -22,4 +22,8 @@ export class ProductDtoService {
   public addProduct(productDto: ProductDto): Observable<ProductDto> {
     return this.httpClient.post<ProductDto>(`${this.apiServerUrl}/api/products`, productDto);
   }
+
+  public deleteProduct(productDtoId: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.apiServerUrl}/api/products/${productDtoId}`);
+  }
 }
