@@ -1,5 +1,6 @@
 export enum ProductType {
-    LEGS  ,
-    UPPER_BODY ,
-    HEAD 
+    LEGS,
+    UPPER_BODY,
+    HEAD,
+    HANDS
 }

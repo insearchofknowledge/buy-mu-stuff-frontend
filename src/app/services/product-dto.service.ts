@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { ProductDto } from '../dto/product-dto';
 import { environment } from 'src/environments/environment';
+import { Form } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,13 @@ export class ProductDtoService {
     return this.httpClient.get<ProductDto[]>('/api/products',{headers: headers});
   }
 
-  public addProduct(productDto: ProductDto): Observable<ProductDto> {
-    return this.httpClient.post<ProductDto>(`${this.apiServerUrl}/api/products`, productDto);
+  public addProduct(productFormData: FormData): Observable<ProductDto> {
+    return this.httpClient.post<ProductDto>(`${this.apiServerUrl}/api/products`, productFormData);
+  }
+
+  public updateProduct(productDtoId:number, productFormData: FormData): Observable<ProductDto> {
+    console.log("update method called from service and pathvariable id is: " +productDtoId)
+    return this.httpClient.put<ProductDto>(`${this.apiServerUrl}/api/products/${productDtoId}`,productFormData);
   }
 
   public deleteProduct(productDtoId: number): Observable<void> {
