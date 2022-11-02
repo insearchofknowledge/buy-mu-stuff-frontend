@@ -1,5 +1,12 @@
 <div class="container mt-5 mb-5">
   <div class="d-flex justify-content-center row">
+    <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+      <input type="search"  id="searchName" class="form-control form-control-dark text-bg-dark" placeholder="Search product..." required>
+    </form> -->
+    <form class="form-inline my-2 my-lg-0 col-12 col-lg-auto ">
+      <input type="search" (ngModelChange)="searchProducts(key.value)" #key="ngModel" ngModel
+       name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search product..." required>
+   </form>
       <div class="col-md-10">
           <div class="row p-2 bg-white border rounded" *ngFor="let product of products" style ="margin-top: 2%;">
               <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="data:image/jpeg;base64,{{product.imageFile}}"></div>

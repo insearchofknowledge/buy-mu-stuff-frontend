@@ -1,3 +1,4 @@
+<h2> <b>Products:</b></h2>
 <table class="table table-striped table-hover">
   <thead>
     <th>Id</th>
@@ -17,7 +18,7 @@
       <td>{{product.name}}</td>
       <td>{{product.producerDto.name}}</td>
       <td>{{product.description}}</td>
-      <td>{{product.price}}</td>
+      <td>${{product.price}}</td>
       <td>{{product.productType}}</td>
       <td>{{product.categoryDto.name}}</td>
       <td><img src='data:image/jpeg;base64,{{product.imageFile}}' style="width: 25px; height: 25px;"></td>
@@ -83,6 +84,71 @@
   </div>
 
   <div class="col-12">
-    <button class="btn btn-dark" type="submit">{{editMode ? 'Update product' : 'Add new product'}}</button>
+    <button class="btn btn-dark" type="submit">{{editProductMode ? 'Update product' : 'Add new product'}}</button>
+  </div>
+</form>
+
+
+<br>
+<br>
+<br>
+
+<h2> <b>Producers:</b></h2>
+<table class="table table-striped table-hover">
+  <thead>
+    <th style="width: auto">Id</th>
+    <th style="width: auto">Producer Name</th>
+    <th style="width: auto">Edit</th>
+    
+  </thead>
+  <tbody>
+    <tr *ngFor="let producer of producers">
+      <td>{{producer.id}}</td>
+      <td>{{producer.name}}</td>
+      <td><button class="btn fa fa-pencil" aria-label="Edit" (click)="editProducerClicked(producer.id)"></button></td>
+    </tr>
+  </tbody>
+</table>
+
+<form action="" [formGroup]="addProducerForm" (ngSubmit)="onSubmitProducer()" class="row g-4 needs-validation" validate>
+  <div class="col-md-2">
+    <label for="name" class="form-label">Name</label>
+    <input formControlName="name" type="text" class="form-control" id="name" required>
+  </div>
+
+  <div class="col-12">
+    <button class="btn btn-dark" type="submit">{{editProducerMode ? 'Update producer' : 'Add new producer'}}</button>
+  </div>
+</form>
+
+<br>
+<br>
+<br>
+
+<h2> <b>Categories:</b></h2>
+<table class="table table-striped table-hover">
+  <thead>
+    <th>Id</th>
+    <th>Category Name</th>
+    <th>Edit</th>
+    
+  </thead>
+  <tbody>
+    <tr *ngFor="let category of categories">
+      <td>{{category.id}}</td>
+      <td>{{category.name}}</td>
+      <td><button class="btn fa fa-pencil" aria-label="Edit" (click)="editCategoryClicked(category.id)"></button></td>
+    </tr>
+  </tbody>
+</table>
+
+<form action="" [formGroup]="addCategoryForm" (ngSubmit)="onSubmitCategory()" class="row g-4 needs-validation" validate>
+  <div class="col-md-2">
+    <label for="name" class="form-label">Name</label>
+    <input formControlName="name" type="text" class="form-control" id="name" required>
+  </div>
+
+  <div class="col-12">
+    <button class="btn btn-dark" type="submit">{{ editCategoryMode ? 'Update category' : 'Add new category'}}</button>
   </div>
 </form>

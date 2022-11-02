@@ -11,4 +11,5 @@ export class ProductDto {
     productType: number;
     producerDto: ProducerDto;       // producerDto holds both names for producerDto object of ProducerDto and for AddProducerDto id
     categoryDto: CategoryDto; 
+
 }

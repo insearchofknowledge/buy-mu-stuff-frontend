@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Form, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { CategoryDto } from 'src/app/dto/category-dto';
 import { ProducerDto } from 'src/app/dto/producer-dto';
 import { ProductDto } from 'src/app/dto/product-dto';
@@ -21,13 +21,21 @@ export class ProductDtoComponent implements OnInit {
   public producers: ProducerDto[];
   public productType = ProductType;
   addProductForm: FormGroup;
+  addProducerForm: FormGroup;
+  addCategoryForm: FormGroup;
   public deleteProduct: ProductDto;
   selectedFile: File;
-  @ViewChild('addProductForm') form: NgForm;
+  // @ViewChild('addProductForm') form: NgForm;
   productFormData = new FormData();
   currentProduct: ProductDto;
   currentProductId: number;
-  editMode: boolean = false;
+  currentProducer: ProducerDto;
+  currentProducerId: number;
+  currentCategory: CategoryDto;
+  currentCategoryId: number;
+  editProductMode: boolean = false;
+  editProducerMode: boolean = false;
+  editCategoryMode: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private productDtoService: ProductDtoService, private categoryDtoService: CategoryDtoService, private producerDtoService: ProducerDtoService) { }
 
@@ -36,12 +44,16 @@ export class ProductDtoComponent implements OnInit {
     this.getCategories();
     this.getProducers();
     this.createForm();
+    this.createProducerForm();
+    this.createCategoryForm();
   }
 
+  // ========== PRODUCTS ==========
+
+  // For adding images
   public onFileChanged(event) {
     //Select File
     this.selectedFile = event.target.files[0];
-    // event.target.value = null;
   }
 
   public createForm(): void {
@@ -52,7 +64,6 @@ export class ProductDtoComponent implements OnInit {
       price: new FormControl(''),
       productType: new FormControl(''),
       categoryDto: new FormControl('')
-
     })
   }
 
@@ -63,6 +74,14 @@ export class ProductDtoComponent implements OnInit {
           alert(error.message)
         }
       );
+  }
+
+  public onSubmit(): void {
+    if (!this.editProductMode) {
+      this.onAddProduct();
+    } else {
+      this.onUpdateProduct();
+    }
   }
 
   public onAddProduct(): void {
@@ -88,32 +107,6 @@ export class ProductDtoComponent implements OnInit {
     })
   }
 
-  public getCategories(): void {
-    this.categoryDtoService.getCategories()
-      .subscribe((response: CategoryDto[]) => { this.categories = response; },
-        (error: HttpErrorResponse) => {
-          alert(error.message)
-        }
-      );
-  }
-
-  public getProducers(): void {
-    this.producerDtoService.getProducers()
-      .subscribe((response: ProducerDto[]) => { this.producers = response; },
-        (error: HttpErrorResponse) => {
-          alert(error.message)
-        }
-      );
-  }
-
-  public onSubmit(): void {
-    if (!this.editMode) {
-      this.onAddProduct();
-    } else {
-      this.onUpdateProduct();
-    }
-  }
-
   public onUpdateProduct(): void {
     console.log('pressUpdateButton');
     if (this.selectedFile != null) {
@@ -131,28 +124,18 @@ export class ProductDtoComponent implements OnInit {
       next: (response: ProductDto) => {
         console.log(response);
         this.ngOnInit();
-        this.editMode = false;
+        this.editProductMode = false;
         this.addProductForm.reset;
       },
       error: (errorResponse: HttpErrorResponse) => {
         console.log(errorResponse);
       }
     })
-    // this.productDtoService.updateProduct(product).subscribe(
-    //   (response: ProductDto) => {
-    //     console.log(response);
-    //     this.getProducts();
-    //   },
-    //   (error: HttpErrorResponse) => {
-    //     alert(error.message);
-    //   }
-    // );
   }
 
-  onEditClicked(productDtoId: number) {
-    this.currentProductId = productDtoId;
-    // Get the product based on the id
-    console.log("fetching product with id: " + productDtoId)
+  public onEditClicked(productDtoId: number) {
+    this.currentProductId = productDtoId;        // ----> this will be needed in the onUpdateProduct()
+    // Get the product based on the Id
     this.currentProduct = this.products.find((prod) => { return prod.id === productDtoId })
     console.log(this.currentProduct);
 
@@ -168,8 +151,7 @@ export class ProductDtoComponent implements OnInit {
     });
 
     //Change the button value to Update product:
-    this.editMode = true;
-    console.log("this editmode changed to: " + this.editMode);
+    this.editProductMode = true;
   }
 
   public onDeleteProduct(productDtoId: number): void {
@@ -184,4 +166,142 @@ export class ProductDtoComponent implements OnInit {
       }
     );
   }
+  // ========== END OF PRODUCTS ==========
+
+  // ========== CATEGORIES ==========
+
+  public createCategoryForm(): void {
+    this.addCategoryForm = new FormGroup({
+      name: new FormControl('')
+    })
+  }
+
+  public getCategories(): void {
+    this.categoryDtoService.getCategories()
+      .subscribe((response: CategoryDto[]) => { this.categories = response; },
+        (error: HttpErrorResponse) => {
+          alert(error.message)
+        }
+      );
+  }
+
+  public onSubmitCategory(): void {
+    if (!this.editCategoryMode) {
+      this.onAddCategory();
+    } else {
+      this.onUpdateCategory();
+    }
+  }
+
+  public onAddCategory(): void {
+    console.log("onaddCategory called....." + this.addCategoryForm.value);
+    this.categoryDtoService.addCategory(this.addCategoryForm.value).subscribe({
+      next: (response: CategoryDto) => {
+        console.log(response);
+        this.getCategories();
+        this.createCategoryForm();
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        console.log(errorResponse);
+      }
+    })
+  }
+
+  public editCategoryClicked(categoryDtoId: number) {
+    this.currentCategoryId = categoryDtoId;   // ----> this will be needed in the onUpdateCategory()
+    // Get the category based on the Id:
+    this.currentCategory = this.categories.find((cat) => { return cat.id === categoryDtoId })
+
+    // Populate the form with the product details:
+    this.addCategoryForm.setValue({
+      name: this.currentCategory.name
+    });
+
+    // Change the button value tp Update category:
+    this.editCategoryMode = true;
+  }
+
+  public onUpdateCategory(): void {
+    this.categoryDtoService.updateCategory(this.currentCategoryId, this.addCategoryForm.value).subscribe({
+      next: (response: CategoryDto) => {
+        console.log(response);
+        this.ngOnInit();
+        this.editCategoryMode = false;
+        this.addCategoryForm.reset;
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        console.log(errorResponse);
+      }
+    })
+  }
+  // ========== END OF CATEGORIES ==========
+
+  // ========== PRODUCERS ==========
+
+  public createProducerForm(): void {
+    this.addProducerForm = new FormGroup({
+      name: new FormControl('')
+    })
+  }
+
+  public getProducers(): void {
+    this.producerDtoService.getProducers()
+      .subscribe((response: ProducerDto[]) => { this.producers = response; },
+        (error: HttpErrorResponse) => {
+          alert(error.message)
+        }
+      );
+  }
+
+  public onSubmitProducer(): void {
+    if (!this.editProducerMode) {
+      this.onAddProducer();
+    }
+    else {
+      this.onUpdateProducer();
+    }
+  }
+
+  public onAddProducer(): void {
+    this.producerDtoService.addProducer(this.addProducerForm.value).subscribe({
+      next: (response: ProducerDto) => {
+        console.log(response);
+        this.getProducers();
+        this.createProducerForm();
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        console.log(errorResponse);
+        alert(errorResponse.message);
+      }
+    })
+  }
+
+  public editProducerClicked(producerDtoId: number) {
+    this.currentProducerId = producerDtoId;  // ----> this will be needed in the onUpdateProduer()
+    // Get the producer based on the Id:
+    this.currentProducer = this.producers.find((prdcr) => { return prdcr.id === producerDtoId })
+
+    // Populate the form with the producer details:
+    this.addProducerForm.setValue({
+      name: this.currentProducer.name
+    });
+
+    // Change the button value tp Update producer:
+    this.editProducerMode = true;
+  }
+
+  public onUpdateProducer(): void {
+    this.producerDtoService.updateProducer(this.currentProducerId, this.addProducerForm.value).subscribe({
+      next: (response: ProductDto) => {
+        console.log(response);
+        this.ngOnInit();
+        this.editProducerMode = false;
+        this.addProducerForm.reset;
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        console.log(errorResponse);
+      }
+    })
+  }
+  // ========== END OF PRODUCERS ==========
 }

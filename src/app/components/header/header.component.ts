@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     // this.getProducts();
+
   }
 
   // public getProducts(): void {
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit {
   //         alert(error.message)
   //       }
   //     );
+  //     console.log(this.products);
   // }
 
   // public searchProducts(key: string): void {
