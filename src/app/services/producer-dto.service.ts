@@ -19,7 +19,7 @@ export class ProducerDtoService {
     return this.httpClient.get<ProducerDto[]>('/api/producers',{headers: headers});
   }
 
-  addProducer(producerDto:ProducerDto):Observable<ProducerDto> {
+  public addProducer(producerDto:ProducerDto):Observable<ProducerDto> {
     return this.httpClient.post<ProducerDto>(`${this.apiServerUrl}/api/producers`, producerDto);
   }
 

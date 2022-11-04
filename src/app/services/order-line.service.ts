@@ -18,4 +18,13 @@ export class OrderLineService {
     headers.set('Content-Type', 'application/json; charset=utf-8');
     return this.httpClient.get<OrderLine[]>('/api/orderLines',{headers: headers});
   }
+
+  public addOrderLine(orderLine:OrderLine):Observable<OrderLine> {
+    console.log("orderline service called trying to add orderLine " + orderLine);
+    return this.httpClient.post<OrderLine>(`${this.apiServerUrl}/api/orderLines`, orderLine);
+  }
+
+  public deleteOrderLine(orderLineId:number):Observable<void>{
+    return this.httpClient.delete<void>(`${this.apiServerUrl}/api/orderLines/${orderLineId}`);
+  }
 }

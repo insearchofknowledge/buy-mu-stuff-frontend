@@ -159,7 +159,6 @@ export class ProductDtoComponent implements OnInit {
       (response: void) => {
         console.log(response);
         this.getProducts();
-
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

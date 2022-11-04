@@ -23,7 +23,9 @@
                       <h4 class="mr-1">${{product.price}}</h4><span class="strike-text">${{product.price *2}}</span>
                   </div>
                   <h6 class="text-success">Free shipping</h6>
-                  <div class="d-flex flex-column mt-4"><button class="btn btn-dark btn-sm" type="button">Details</button><button class="btn btn-outline-dark btn-sm mt-2" type="button">Add to Cart</button></div>
+                  <div class="d-flex flex-column mt-4">
+                    <button class="btn btn-dark btn-sm" type="button">Details</button>
+                    <button class="btn btn-outline-dark btn-sm mt-2" (click)="onAddToCart(product.id)" type="button">Add to Cart</button></div>
               </div>
           </div>
       </div>
