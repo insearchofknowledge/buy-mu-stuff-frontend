@@ -1,9 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { OrderLine } from 'src/app/dto/order-line';
+import { OrderLineDto } from 'src/app/dto/order-line-dto';
 import { ProductDto } from 'src/app/dto/product-dto';
-import { OrderLineService } from 'src/app/services/order-line.service';
+import { OrderLineDtoService } from 'src/app/services/order-line-dto.service';
 import { ProductDtoService } from 'src/app/services/product-dto.service';
 
 @Component({
@@ -16,11 +16,11 @@ export class AllProductsComponent implements OnInit {
   public products: ProductDto[];
   public currentProduct: ProductDto;
   public currentProductId: number;
-  public orderLine: OrderLine;
+  public orderLine: OrderLineDto;
   public addOrderLineForm: FormGroup;
 
 
-  constructor(private productDtoService: ProductDtoService, private orderLineService: OrderLineService) { }
+  constructor(private productDtoService: ProductDtoService, private orderLineDtoService: OrderLineDtoService) { }
 
   ngOnInit(): void {
     this.getProducts();
@@ -70,8 +70,8 @@ export class AllProductsComponent implements OnInit {
       appUserDto: 4
     });
     console.log(this.addOrderLineForm.value);
-    this.orderLineService.addOrderLine(this.addOrderLineForm.value).subscribe({
-      next: (response: OrderLine) => {
+    this.orderLineDtoService.addOrderLine(this.addOrderLineForm.value).subscribe({
+      next: (response: OrderLineDto) => {
         console.log(response);
         this.ngOnInit();
       },

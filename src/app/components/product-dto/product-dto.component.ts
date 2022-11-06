@@ -20,22 +20,22 @@ export class ProductDtoComponent implements OnInit {
   public categories: CategoryDto[];
   public producers: ProducerDto[];
   public productType = ProductType;
-  addProductForm: FormGroup;
-  addProducerForm: FormGroup;
-  addCategoryForm: FormGroup;
+  public addProductForm: FormGroup;
+  public addProducerForm: FormGroup;
+  public addCategoryForm: FormGroup;
   public deleteProduct: ProductDto;
-  selectedFile: File;
+  public selectedFile: File;
   // @ViewChild('addProductForm') form: NgForm;
-  productFormData = new FormData();
-  currentProduct: ProductDto;
-  currentProductId: number;
-  currentProducer: ProducerDto;
-  currentProducerId: number;
-  currentCategory: CategoryDto;
-  currentCategoryId: number;
-  editProductMode: boolean = false;
-  editProducerMode: boolean = false;
-  editCategoryMode: boolean = false;
+  public productFormData = new FormData();
+  public currentProduct: ProductDto;
+  public currentProductId: number;
+  public currentProducer: ProducerDto;
+  public currentProducerId: number;
+  public currentCategory: CategoryDto;
+  public currentCategoryId: number;
+  public editProductMode: boolean = false;
+  public editProducerMode: boolean = false;
+  public editCategoryMode: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private productDtoService: ProductDtoService, private categoryDtoService: CategoryDtoService, private producerDtoService: ProducerDtoService) { }
 
@@ -108,7 +108,6 @@ export class ProductDtoComponent implements OnInit {
   }
 
   public onUpdateProduct(): void {
-    console.log('pressUpdateButton');
     if (this.selectedFile != null) {
       this.productFormData.append('imageFile', this.selectedFile, this.selectedFile.name);
     }
@@ -119,7 +118,6 @@ export class ProductDtoComponent implements OnInit {
     this.productFormData.append('producerDto', this.addProductForm.value.producerDto);
     this.productFormData.append('productType', this.addProductForm.value.productType);
 
-    console.log(this.productFormData);
     this.productDtoService.updateProduct(this.currentProductId, this.productFormData).subscribe({
       next: (response: ProductDto) => {
         console.log(response);
@@ -136,11 +134,9 @@ export class ProductDtoComponent implements OnInit {
   public onEditClicked(productDtoId: number) {
     this.currentProductId = productDtoId;        // ----> this will be needed in the onUpdateProduct()
     // Get the product based on the Id
-    this.currentProduct = this.products.find((prod) => { return prod.id === productDtoId })
+    this.currentProduct = this.products.find((prod) => { return prod.id === productDtoId });
     console.log(this.currentProduct);
-
     // Populate the form with the product details
-
     this.addProductForm.setValue({
       name: this.currentProduct.name,
       producerDto: this.currentProduct.producerDto.id,
@@ -168,7 +164,6 @@ export class ProductDtoComponent implements OnInit {
   // ========== END OF PRODUCTS ==========
 
   // ========== CATEGORIES ==========
-
   public createCategoryForm(): void {
     this.addCategoryForm = new FormGroup({
       name: new FormControl('')

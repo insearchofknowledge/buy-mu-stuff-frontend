@@ -2,7 +2,7 @@ import { ProducerDto } from "./producer-dto";
 import { ProductDto } from "./product-dto";
 import { User } from "./user";
 
-export class OrderLine {
+export class OrderLineDto {
     id: number;
     quantity: number;
     productPrice: number;

@@ -25,7 +25,6 @@ export class ProductDtoService {
   }
 
   public updateProduct(productDtoId:number, productFormData: FormData): Observable<ProductDto> {
-    console.log("update method called from service and pathvariable id is: " +productDtoId)
     return this.httpClient.put<ProductDto>(`${this.apiServerUrl}/api/products/${productDtoId}`,productFormData);
   }
 

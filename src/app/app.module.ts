@@ -16,6 +16,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { UserService } from './services/user.service';
 import { AllProductsComponent } from './components/all-products/all-products.component';
 import { CartComponent } from './components/cart/cart.component';
+import { PlaceOrderComponent } from './components/place-order/place-order.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -37,7 +38,8 @@ export class XhrInterceptor implements HttpInterceptor {
     HeaderComponent,
     RegisterComponent,
     AllProductsComponent,
-    CartComponent
+    CartComponent,
+    PlaceOrderComponent
   ],
   imports: [
     BrowserModule,

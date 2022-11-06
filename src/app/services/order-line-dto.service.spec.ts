@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { OrderLineService } from './order-line.service';
+import { OrderLineDtoService } from './order-line-dto.service';
 
 describe('OrderLineService', () => {
-  let service: OrderLineService;
+  let service: OrderLineDtoService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(OrderLineService);
+    service = TestBed.inject(OrderLineDtoService);
   });
 
   it('should be created', () => {
