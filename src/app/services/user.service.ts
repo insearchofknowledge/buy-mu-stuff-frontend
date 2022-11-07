@@ -11,11 +11,15 @@ export class UserService {
   private apiServerUrl = environment.apiBaseUrl;
   constructor(private http: HttpClient) { }
 
-  userRegisterService(){}
+  userRegisterService() { }
 
 
 
   public register(user: User): Observable<string> {
     return this.http.post<string>(`${this.apiServerUrl}/api/user`, user);
+  }
+
+  public getUserById(userId: number): Observable<User> {
+    return this.http.get<User>(`${this.apiServerUrl}/api/user/${userId}`)
   }
 }

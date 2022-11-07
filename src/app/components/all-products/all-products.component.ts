@@ -67,7 +67,7 @@ export class AllProductsComponent implements OnInit {
     this.addOrderLineForm.setValue({
       quantity: 1,
       productDto: productDtoId,
-      appUserDto: 4
+      appUserDto: 1
     });
     console.log(this.addOrderLineForm.value);
     this.orderLineDtoService.addOrderLine(this.addOrderLineForm.value).subscribe({

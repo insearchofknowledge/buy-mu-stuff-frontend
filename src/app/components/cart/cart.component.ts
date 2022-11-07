@@ -26,7 +26,7 @@ export class CartComponent implements OnInit {
   }
 
   public getOrderLines(): void {
-    this.orderLineDtoService.getOrderLines()
+    this.orderLineDtoService.getUserSpecificOrderLines(1)    // HARDCODED NEEDS TO BE CHANGED !!!!
       .subscribe((response: OrderLineDto[]): void => { this.orderLines = response; },
         (error: HttpErrorResponse) => {
           alert(error.message)
@@ -36,7 +36,7 @@ export class CartComponent implements OnInit {
 
   public getTotalCost() {
     let sum: number = 0;  // IF NOT INITIALIZED IT WILL BE NaN
-    this.orderLineDtoService.getOrderLines().subscribe({
+    this.orderLineDtoService.getUserSpecificOrderLines(1).subscribe({   // HARDCODED STUFF 
       next: (response: OrderLineDto[]) => {
         response.forEach((item) => {
           sum += item.totalPrice;

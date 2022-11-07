@@ -12,10 +12,18 @@ export class OrderLineDtoService {
   private apiServerUrl = environment.apiBaseUrl;
   constructor(private httpClient: HttpClient) { }
 
-  public getOrderLines(): Observable<OrderLineDto[]> {
+  public getAllOrderLines(): Observable<OrderLineDto[]> {
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json; charset=utf-8');
     return this.httpClient.get<OrderLineDto[]>('/api/orderLines', { headers: headers });
+  }
+
+  public getUserSpecificOrderLines(userId: number): Observable<OrderLineDto[]> {
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8')
+    console.log('trying to display headers...')
+    console.log(headers);
+    return this.httpClient.get<OrderLineDto[]>(`${this.apiServerUrl}/api/orderLines/${userId}`,{ headers: headers });
   }
 
   public addOrderLine(orderLine: OrderLineDto): Observable<OrderLineDto> {
