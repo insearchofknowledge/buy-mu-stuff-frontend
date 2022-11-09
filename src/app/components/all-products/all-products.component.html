@@ -1,13 +1,34 @@
-<div class="container mt-5 mb-5">
-  <div class="d-flex justify-content-center row">
-    <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-      <input type="search"  id="searchName" class="form-control form-control-dark text-bg-dark" placeholder="Search product..." required>
-    </form> -->
+
+<div class="container" >
+  <div class="row">
+  <div class="col-md-2">
+    <br>
     <form class="form-inline my-2 my-lg-0 col-12 col-lg-auto ">
       <input type="search" (ngModelChange)="searchProducts(key.value)" #key="ngModel" ngModel
        name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search product..." required>
    </form>
-      <div class="col-md-10">
+   <br>
+   
+   
+   <div class="list-group" id="list-tab" role="tablist">
+    <h4>Categories: </h4>
+    <a class="list-group-item list-group-item-action list-group-item-dark" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Spices</a>
+    <a class="list-group-item list-group-item-action list-group-item-dark" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Dried Fruits</a>
+    <a class="list-group-item list-group-item-action list-group-item-dark" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Peanuts/Nuts/Seeds</a>
+    <a class="list-group-item list-group-item-action list-group-item-dark" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Cereals</a>
+  </div>
+  </div>
+
+  <div class="col-md-10">
+  <div class="d-flex justify-content-right row">
+    <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+      <input type="search"  id="searchName" class="form-control form-control-dark text-bg-dark" placeholder="Search product..." required>
+    </form>
+    <form class="form-inline my-2 my-lg-0 col-12 col-lg-auto ">
+      <input type="search" (ngModelChange)="searchProducts(key.value)" #key="ngModel" ngModel
+       name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search product..." required>
+   </form> -->
+      <div class="col-md-10" style="width: 80%">
           <div class="row p-2 bg-white border rounded" *ngFor="let product of products" style ="margin-top: 2%;">
               <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="data:image/jpeg;base64,{{product.imageFile}}"></div>
               <div class="col-md-6 mt-1">
@@ -30,6 +51,8 @@
           </div>
       </div>
   </div>
+</div>
+</div>
 </div>
 
 

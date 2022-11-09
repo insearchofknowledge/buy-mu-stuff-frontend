@@ -1,3 +1,4 @@
+<div class="container" style="width:80%; margin-left:0" >
 <h2> <b>Products:</b></h2>
 <table class="table table-striped table-hover">
   <thead>
@@ -28,6 +29,7 @@
     </tr>
   </tbody>
 </table>
+
 
 <form action="" [formGroup]="addProductForm" (ngSubmit)="onSubmit()" class="row g-4 needs-validation" validate>
   <div class="col-md-2">
@@ -152,3 +154,4 @@
     <button class="btn btn-dark" type="submit">{{ editCategoryMode ? 'Update category' : 'Add new category'}}</button>
   </div>
 </form>
+</div>

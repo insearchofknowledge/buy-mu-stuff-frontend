@@ -1,76 +1,81 @@
-<form action="" [formGroup]="registerForm" (ngSubmit)="onRegister()" class="row g-3 needs-validation" validate >
-  <div class="col-md-3">
+<form action="" [formGroup]="registerForm" (ngSubmit)="onRegister()" class="row g-3 needs-validation" validate>
+  <div class="col-md-2">
     <label for="validationCustom01" class="form-label">First name</label>
-    <input formControlName="firstName" type="text" class="form-control"  id="validationCustom01" required>
+    <input formControlName="firstName" type="text" class="form-control" id="validationCustom01" required>
     <div class="valid-feedback">
       Looks good!
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-2">
     <label for="validationCustom02" class="form-label">Last name</label>
-    <input  formControlName="lastName" type="text" class="form-control" id="validationCustom02" required>
+    <input formControlName="lastName" type="text" class="form-control" id="validationCustom02" required>
     <div class="valid-feedback">
       Looks good!
     </div>
   </div>
-  <div class="col-md-6">
-    <label for="validationCustomUsername" class="form-label" >Email</label>
-    <div class="input-group has-validation">
-      <span class="input-group-text" id="inputGroupPrepend">@</span>
-      <input formControlName="email" type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend"
-        required>
-      <div class="invalid-feedback">
-        Please choose a username.
+  <div>
+    <div class="col-md-4">
+      <label for="validationCustomUsername" class="form-label">Email</label>
+      <div class="input-group has-validation">
+        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+        <input formControlName="email" type="text" class="form-control" id="validationCustomUsername"
+          aria-describedby="inputGroupPrepend" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <label for="validationCustom03" class="form-label" >Password</label>
+  <div class="col-md-4">
+    <label for="validationCustom03" class="form-label">Password</label>
     <input formControlName="password" type="text" class="form-control" id="validationCustom03" required>
     <div class="invalid-feedback">
       Please provide a valid password.
     </div>
   </div>
-  <div class="col-md-6">
-    <label for="validationCustom03" class="form-label" >Confirm Password</label>
-    <input formControlName="" type="text" class="form-control" id="validationCustom03" required>
-    <div class="invalid-feedback">
-      Please provide a valid password.
+  <div>
+    <div class="col-md-4">
+      <label for="validationCustom03" class="form-label">Phone</label>
+      <input formControlName="phoneNumber" type="text" class="form-control" id="validationCustom03" required>
+      <div class="invalid-feedback">
+        Please provide a valid phone number.
+      </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <label for="validationCustom03" class="form-label">Phone</label>
-    <input  formControlName="phoneNumber" type="text" class="form-control" id="validationCustom03" required>
-    <div class="invalid-feedback">
-      Please provide a valid phone number.
+  <div>
+    <div class="col-md-4">
+      <label for="validationCustom03" class="form-label">Street</label>
+      <input formControlName="street" type="text" class="form-control" id="validationCustom03" required>
+      <div class="invalid-feedback">
+        Please provide a valid address.
+      </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <label for="validationCustom03" class="form-label" >Street</label>
-    <input formControlName="street" type="text" class="form-control" id="validationCustom03" required>
-    <div class="invalid-feedback">
-      Please provide a valid address.
+  <div>
+    <div class="col-md-4">
+      <label for="validationCustom03" class="form-label">City</label>
+      <input formControlName="city" type="text" class="form-control" id="validationCustom03" required>
+      <div class="invalid-feedback">
+        Please provide a valid address.
+      </div>
     </div>
   </div>
-  <div class="col-md-4">
-    <label for="validationCustom03" class="form-label" >City</label>
-    <input formControlName="city" type="text" class="form-control" id="validationCustom03" required>
-    <div class="invalid-feedback">
-      Please provide a valid address.
+  <div>
+    <div class="col-md-4">
+      <label for="validationCustom03" class="form-label">County</label>
+      <input formControlName="county" type="text" class="form-control" id="validationCustom03" required>
+      <div class="invalid-feedback">
+        Please provide a valid address.
+      </div>
     </div>
   </div>
-  <div class="col-md-4">
-    <label for="validationCustom03" class="form-label" >County</label>
-    <input formControlName="county" type="text" class="form-control" id="validationCustom03" required>
-    <div class="invalid-feedback">
-      Please provide a valid address.
-    </div>
-  </div>
-  <div class="col-md-4">
-    <label for="validationCustom03" class="form-label" >Zip Code</label>
-    <input formControlName="zipCode" type="text" class="form-control" id="validationCustom03" required>
-    <div class="invalid-feedback">
-      Please provide a valid address.
+  <div>
+    <div class="col-md-4">
+      <label for="validationCustom03" class="form-label">Zip Code</label>
+      <input formControlName="zipCode" type="text" class="form-control" id="validationCustom03" required>
+      <div class="invalid-feedback">
+        Please provide a valid address.
+      </div>
     </div>
   </div>
   <!-- <div class="col-12">

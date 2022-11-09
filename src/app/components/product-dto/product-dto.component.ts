@@ -20,6 +20,7 @@ export class ProductDtoComponent implements OnInit {
   public categories: CategoryDto[];
   public producers: ProducerDto[];
   public productType = ProductType;
+ // public productTypes = ProductType[ProductType.HANDS, ProductType.HEAD, ProductType.LEGS, ProductType.UPPER_BODY];
   public addProductForm: FormGroup;
   public addProducerForm: FormGroup;
   public addCategoryForm: FormGroup;
@@ -46,8 +47,14 @@ export class ProductDtoComponent implements OnInit {
     this.createForm();
     this.createProducerForm();
     this.createCategoryForm();
+    // this.splitProductTypesInTwo();
   }
-
+  // public splitProductTypesInTwo() {
+  //   let half: number = Math.ceil(this.productTypes.length / 2);
+  //   const firtsHalf =this.productTypes.slice(0,half);
+  //   this.productTypes=firtsHalf;
+  //   console.log(firtsHalf);
+  // }
   // ========== PRODUCTS ==========
 
   // For adding images
