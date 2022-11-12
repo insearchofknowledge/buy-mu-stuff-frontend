@@ -9,6 +9,8 @@ import { OrderLineDto } from '../dto/order-line-dto';
 })
 export class OrderLineDtoService {
 
+  private numberOfItemsInCart: number;
+
   private apiServerUrl = environment.apiBaseUrl;
   constructor(private httpClient: HttpClient) { }
 
@@ -23,7 +25,7 @@ export class OrderLineDtoService {
     headers.set('Content-Type', 'application/json; charset=utf-8')
     console.log('trying to display headers...')
     console.log(headers);
-    return this.httpClient.get<OrderLineDto[]>(`${this.apiServerUrl}/api/orderLines/${userId}`,{ headers: headers });
+    return this.httpClient.get<OrderLineDto[]>(`${this.apiServerUrl}/api/orderLines/${userId}`, { headers: headers });
   }
 
   public addOrderLine(orderLine: OrderLineDto): Observable<OrderLineDto> {
@@ -36,5 +38,13 @@ export class OrderLineDtoService {
 
   public deleteOrderLine(orderLineId: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.apiServerUrl}/api/orderLines/${orderLineId}`);
+  }
+
+  saveNumberOfItems(number: number) {
+    this.numberOfItemsInCart = number;
+  }
+
+  public getNumberOfItems(): number {
+    return this.numberOfItemsInCart;
   }
 }

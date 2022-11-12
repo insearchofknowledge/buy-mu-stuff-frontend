@@ -16,6 +16,7 @@ export class CartComponent implements OnInit {
   public updateQuantityForm: FormGroup;
   public currentOrderLine: OrderLineDto;
   public currentOrderLineId: number;
+  public numberOfItemsIncart: number;
 
   constructor(private orderLineDtoService: OrderLineDtoService) { }
 
@@ -27,7 +28,9 @@ export class CartComponent implements OnInit {
 
   public getOrderLines(): void {
     this.orderLineDtoService.getUserSpecificOrderLines(1)    // HARDCODED NEEDS TO BE CHANGED !!!!
-      .subscribe((response: OrderLineDto[]): void => { this.orderLines = response; },
+      .subscribe((response: OrderLineDto[]): void => {
+        this.orderLines = response;
+      },
         (error: HttpErrorResponse) => {
           alert(error.message)
         }
@@ -101,6 +104,10 @@ export class CartComponent implements OnInit {
     // Complete the form which will be the orderLine object sent to backend
     this.updateQuantityForm
 
+  }
+
+  public setNumberOfItemsIncart(number: number) {
+    this.orderLineDtoService.saveNumberOfItems(number);
   }
 
   // public populateTheArray(): void {

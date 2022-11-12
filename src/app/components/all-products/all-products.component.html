@@ -1,5 +1,5 @@
 
-<div class="container" >
+<div class="container" style="margin-left:0;" >
   <div class="row">
   <div class="col-md-2">
     <br>
@@ -10,11 +10,11 @@
    <br>
    
    
-   <div class="list-group" id="list-tab" role="tablist">
+   <div class="list-group" id="list-tab" role="tablist" >
     <h4>Categories: </h4>
     <a class="list-group-item list-group-item-action list-group-item-dark" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Spices</a>
     <a class="list-group-item list-group-item-action list-group-item-dark" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Dried Fruits</a>
-    <a class="list-group-item list-group-item-action list-group-item-dark" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Peanuts/Nuts/Seeds</a>
+    <a class="list-group-item list-group-item-action list-group-item-dark" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Peanuts / Nuts / Seeds</a>
     <a class="list-group-item list-group-item-action list-group-item-dark" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Cereals</a>
   </div>
   </div>
@@ -28,24 +28,24 @@
       <input type="search" (ngModelChange)="searchProducts(key.value)" #key="ngModel" ngModel
        name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search product..." required>
    </form> -->
-      <div class="col-md-10" style="width: 80%">
+      <div class="col-md-10">
           <div class="row p-2 bg-white border rounded" *ngFor="let product of products" style ="margin-top: 2%;">
               <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="data:image/jpeg;base64,{{product.imageFile}}"></div>
               <div class="col-md-6 mt-1">
                   <h5>{{product.name}}</h5>
                   <div class="d-flex flex-row">
                   </div>
-                  <div class="mt-1 mb-1 spec-1"><span>100% cotton</span><span class="dot"></span><span>Light weight</span><span class="dot"></span><span>Best finish<br></span></div>
-                  <div class="mt-1 mb-1 spec-1"><span>Unique design</span><span class="dot"></span><span>For men</span><span class="dot"></span><span>Casual<br></span></div>
-                  <p class="text-justify text-truncate para mb-0">{{product.description}}<br><br></p>
+                  <div class="mt-1 mb-1"><span>Producer: {{product.producerDto.name}}</span></div>
+                  <div class="mt-1 mb-1"><span>Category: {{product.categoryDto.name}}</span></div>
+                  <div class="mt-1 mb-1"><span >Type: {{product.productType}}</span></div>
               </div>
               <div class="align-items-center align-content-center col-md-3 border-left mt-1">
                   <div class="d-flex flex-row align-items-center">
                       <h4 class="mr-1">${{product.price}}</h4><span class="strike-text">${{product.price *2}}</span>
                   </div>
                   <h6 class="text-success">Free shipping</h6>
-                  <div class="d-flex flex-column mt-4">
-                    <button class="btn btn-dark btn-sm" type="button">Details</button>
+                  <div class="d-flex flex-column mt-3">
+                    <button class="btn btn-dark btn-sm" type="button" routerLinkActive="active" routerLink="/productDetails">Details</button>
                     <button class="btn btn-outline-dark btn-sm mt-2" (click)="onAddToCart(product.id)" type="button">Add to Cart</button></div>
               </div>
           </div>
@@ -54,28 +54,5 @@
 </div>
 </div>
 </div>
-
-
-    <!-- <div class="row row-cols-1 row-cols-md-4" >
-      <div class="cols-1 width:20rem" *ngFor ="let product of products" style="padding-top:1%; margin:0px;">
-        <div class="card h-100"  >
-            <img src='data:image/jpeg;base64,{{product.imageFile}}' class="card-img-top"  alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{product.name}}</h5>
-              <p class="card-text">{{product.description}}</p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Producer: {{product.producerDto.name}}</li>
-              <li class="list-group-item">Type: {{product.productType}}</li>
-              <li class="list-group-item">Category: {{product.categoryDto.name}}</li>
-              <li class="list-group-item">$ {{product.price}}</li>
-            </ul>
-            <div class="card-body">
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-        </div>
-      </div>
-    </div> -->
 
   <!--https://bbbootstrap.com/snippets/bootstrap-ecommerce-category-product-list-page-93685579 -->

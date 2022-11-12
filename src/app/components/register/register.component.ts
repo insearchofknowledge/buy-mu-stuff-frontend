@@ -11,7 +11,9 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private userService:UserService, private formBuilder:FormBuilder, private router: Router) { }
+  public fieldTextType: boolean = false;
+
+  constructor(private userService: UserService, private formBuilder: FormBuilder, private router: Router) { }
 
   registerForm: FormGroup;
   ngOnInit(): void {
@@ -31,16 +33,21 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  public onRegister():void{
+  public onRegister(): void {
     this.userService.register(this.registerForm.value).subscribe({
-      next:(response: string)=>{
+      next: (response: string) => {
         console.log(response);
-        this.router.navigate(['login']);
+        this.router.navigateByUrl('/login');
       },
-      error:(errorResponse: HttpErrorResponse)=>{
+      error: (errorResponse: HttpErrorResponse) => {
         console.log(errorResponse);
       }
     })
+  }
+
+  public changeFieldTextType() {
+    console.log("changeFieldTextType called....")
+    this.fieldTextType = !this.fieldTextType;
   }
 
 }

@@ -3,16 +3,24 @@
 </div>
 <form role="form" (submit)="login()">
 	<div class="form-group col-md-3">
-		<label for="username">Username:</label> <input type="text"
-			class="form-control" id="username" name="username" [(ngModel)]="credentials.username"/>
+		<label for="username">Username:</label> <input type="text" class="form-control" id="username" name="username"
+			[(ngModel)]="credentials.username" />
 	</div>
 	<div class="form-group col-md-3">
-		<label for="password">Password:</label> <input type="password"
-			class="form-control" id="password" name="password" [(ngModel)]="credentials.password"/>
+		<label for="password">Password:</label>
+		<div class="input-group">
+			<input type="{{fieldTextType ? 'text' : 'password'}}" class="form-control" id="password" name="password"
+				[(ngModel)]="credentials.password" />
+			<span class="input-group-text"> <i class="fa"
+					[ngClass]="{'fa-eye-slash fa-lg' :!fieldTextType, 'fa-eye fa-lg' : fieldTextType}"
+					(click)="changeFieldTextType()"></i></span>
+		</div>
 	</div>
+
 	<br>
-	<button type="submit" class="btn btn-dark">Submit</button>
+	<button type="submit" class="btn btn-dark">Login</button>
 </form>
-	
-	<br>
-	<a href="#" class="nav-link text-dark hover-item" routerLinkActive="active" routerLink="/register"><b>Not registered? Click here!</b></a>
+
+<br>
+<a href="#" class="nav-link text-dark hover-item" routerLinkActive="active" routerLink="/register"><b>Not registered?
+		Click here!</b></a>

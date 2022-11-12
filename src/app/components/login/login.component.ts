@@ -10,8 +10,9 @@ import { AppService } from '../../services/app.service';
 })
 export class LoginComponent implements OnInit {
 
-  credentials = { username: '', password: '' };
-  error = false;
+  public credentials = { username: '', password: '' };
+  public error = false;
+  public fieldTextType: boolean = false;
 
   constructor(private app: AppService, private http: HttpClient, private router: Router) {
   }
@@ -24,6 +25,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  changeFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
   }
 
 }

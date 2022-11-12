@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { OrderLineDto } from 'src/app/dto/order-line-dto';
 import { ProductDto } from 'src/app/dto/product-dto';
 import { OrderLineDtoService } from 'src/app/services/order-line-dto.service';
@@ -18,9 +19,10 @@ export class AllProductsComponent implements OnInit {
   public currentProductId: number;
   public orderLine: OrderLineDto;
   public addOrderLineForm: FormGroup;
+  
 
 
-  constructor(private productDtoService: ProductDtoService, private orderLineDtoService: OrderLineDtoService) { }
+  constructor(private productDtoService: ProductDtoService, private orderLineDtoService: OrderLineDtoService, private router:Router) { }
 
   ngOnInit(): void {
     this.getProducts();
@@ -73,11 +75,22 @@ export class AllProductsComponent implements OnInit {
     this.orderLineDtoService.addOrderLine(this.addOrderLineForm.value).subscribe({
       next: (response: OrderLineDto) => {
         console.log(response);
-        this.ngOnInit();
+        //this.ngOnInit();
+        this.router.navigate(['/allProducts']).then(()=>{
+          window.location.reload();
+        });
+        
       },
       error: (errorResponse: HttpErrorResponse) => {
         console.log(errorResponse);
       }
     })
   }
+
+  // public reloadCurrentRoute() {
+  //   let currentUrl = this.router.url;
+  //   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+  //     this.router.navigate([currentUrl]);
+  //   });
+  // }
 }

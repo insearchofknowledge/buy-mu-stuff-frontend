@@ -98,9 +98,9 @@
 <h2> <b>Producers:</b></h2>
 <table class="table table-striped table-hover">
   <thead>
-    <th style="width: auto">Id</th>
-    <th style="width: auto">Producer Name</th>
-    <th style="width: auto">Edit</th>
+    <th>Id</th>
+    <th>Producer Name</th>
+    <th>Edit</th>
     
   </thead>
   <tbody>
@@ -127,13 +127,14 @@
 <br>
 <br>
 
+
 <h2> <b>Categories:</b></h2>
-<table class="table table-striped table-hover">
+<!-- <div class="d-flex"> -->
+<table class="table table-striped table-hover ">
   <thead>
     <th>Id</th>
     <th>Category Name</th>
     <th>Edit</th>
-    
   </thead>
   <tbody>
     <tr *ngFor="let category of categories">
@@ -143,6 +144,7 @@
     </tr>
   </tbody>
 </table>
+<!-- </div> -->
 
 <form action="" [formGroup]="addCategoryForm" (ngSubmit)="onSubmitCategory()" class="row g-4 needs-validation" validate>
   <div class="col-md-2">

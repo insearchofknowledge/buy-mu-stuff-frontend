@@ -26,11 +26,19 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4">
-    <label for="validationCustom03" class="form-label">Password</label>
-    <input formControlName="password" type="text" class="form-control" id="validationCustom03" required>
-    <div class="invalid-feedback">
-      Please provide a valid password.
+  <div>
+    <div class="col-md-4">
+      <label for="validationCustom03" class="form-label">Password</label>
+      <div class="input-group">
+        <input type="{{fieldTextType ? 'text' : 'password'}}" class="form-control" formControlName="password"
+          id="validationCustom03" required>
+        <span class="input-group-text"><i class="fa"
+            [ngClass]="{'fa-eye-slash fa-lg' : !fieldTextType, 'fa-eye fa-lg' : fieldTextType}"
+            (click)="changeFieldTextType()"></i></span>
+        <div class="invalid-feedback">
+          Please provide a valid password.
+        </div>
+      </div>
     </div>
   </div>
   <div>

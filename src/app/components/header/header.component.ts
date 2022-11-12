@@ -1,6 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { OrderLineDto } from 'src/app/dto/order-line-dto';
 import { ProductDto } from 'src/app/dto/product-dto';
+import { OrderLineDtoService } from 'src/app/services/order-line-dto.service';
 import { ProductDtoService } from 'src/app/services/product-dto.service';
 
 @Component({
@@ -9,12 +11,17 @@ import { ProductDtoService } from 'src/app/services/product-dto.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  products: ProductDto[];
+  public products: ProductDto[];
+  public numberOfCartItems: number = 0;
+  public cartHasItems: boolean=false;
 
-  constructor(private productDtoService: ProductDtoService) { }
+  constructor(private productDtoService: ProductDtoService, private orderLineDtoService: OrderLineDtoService) { }
 
   ngOnInit(): void {
+    this.getNumberOfCartItems();
+    this.numberOfCartItems = this.orderLineDtoService.getNumberOfItems();
     // this.getProducts();
+    this.cartHasItems=false;
 
   }
 
@@ -44,4 +51,17 @@ export class HeaderComponent implements OnInit {
   //     this.getProducts();
   //   }
   // }
+
+  public getNumberOfCartItems() {
+    let length: number = 0;
+    this.orderLineDtoService.getUserSpecificOrderLines(1).subscribe({
+      next: (response: OrderLineDto[]) => {
+        length = response.length;
+        this.numberOfCartItems = length;
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        console.log(errorResponse);
+      }
+    })
+  }
 }

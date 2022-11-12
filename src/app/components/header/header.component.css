@@ -1,0 +1,68 @@
+/* .wrapper {
+    position: relative;
+}
+
+.wrapper span {
+    font-size: auto;
+    font-weight: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: solid #ffc107;
+    border-radius: 90%;
+    height: auto;
+    width: auto;
+    background: #ffc107;
+
+}
+
+.badge:after {
+    content: attr(value);
+    font-size: 14px;
+    color: black;
+    background: #ffc107;
+    border-radius: 50%;
+    padding: 3px;
+    position: relative;
+    left: -8px;
+    top: -15px;
+    opacity: 0.9;
+}
+
+.span {
+    content:attr(value);
+    font-size: 14px;
+    position: absolute;
+    border: solid blue;
+    border-radius: 70%;
+    height: 1px;
+    width: 8px;
+    background:blue;
+} */
+
+
+
+#lblCartCount {
+    content: attr(value);
+    font-size: 14px;
+    color: black;
+    background: #ffc107;
+    border-radius: 100%;
+    padding: 3px;
+    position: relative;
+    left: -8px;
+    top: -15px;
+    opacity: 0.9;
+}
+/* .badge {
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+} */
+
+/* .label-warning[href],
+.badge-warning[href] {
+  background-color: #0b0702;
+} */

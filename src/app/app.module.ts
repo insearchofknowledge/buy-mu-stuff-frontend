@@ -17,6 +17,7 @@ import { UserService } from './services/user.service';
 import { AllProductsComponent } from './components/all-products/all-products.component';
 import { CartComponent } from './components/cart/cart.component';
 import { PlaceOrderComponent } from './components/place-order/place-order.component';
+import { ProductDtoDetailsComponent } from './components/product-dto-details/product-dto-details.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -39,7 +40,8 @@ export class XhrInterceptor implements HttpInterceptor {
     RegisterComponent,
     AllProductsComponent,
     CartComponent,
-    PlaceOrderComponent
+    PlaceOrderComponent,
+    ProductDtoDetailsComponent
   ],
   imports: [
     BrowserModule,
