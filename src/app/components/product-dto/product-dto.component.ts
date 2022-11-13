@@ -55,6 +55,7 @@ export class ProductDtoComponent implements OnInit {
   //   this.productTypes=firtsHalf;
   //   console.log(firtsHalf);
   // }
+
   // ========== PRODUCTS ==========
 
   // For adding images

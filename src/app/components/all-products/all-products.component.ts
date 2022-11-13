@@ -20,8 +20,6 @@ export class AllProductsComponent implements OnInit {
   public orderLine: OrderLineDto;
   public addOrderLineForm: FormGroup;
   
-
-
   constructor(private productDtoService: ProductDtoService, private orderLineDtoService: OrderLineDtoService, private router:Router) { }
 
   ngOnInit(): void {
@@ -36,6 +34,10 @@ export class AllProductsComponent implements OnInit {
           alert(error.message)
         }
       );
+  }
+
+  public modifyProductDtoIdInService(productDtoId:number){
+    this.productDtoService.setProductDtoId(productDtoId);
   }
 
   public searchProducts(key: string): void {

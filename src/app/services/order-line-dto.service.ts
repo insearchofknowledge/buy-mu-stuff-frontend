@@ -40,7 +40,7 @@ export class OrderLineDtoService {
     return this.httpClient.delete<void>(`${this.apiServerUrl}/api/orderLines/${orderLineId}`);
   }
 
-  saveNumberOfItems(number: number) {
+  public saveNumberOfItems(number: number) {
     this.numberOfItemsInCart = number;
   }
 

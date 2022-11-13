@@ -45,7 +45,7 @@
                   </div>
                   <h6 class="text-success">Free shipping</h6>
                   <div class="d-flex flex-column mt-3">
-                    <button class="btn btn-dark btn-sm" type="button" routerLinkActive="active" routerLink="/productDetails">Details</button>
+                    <button class="btn btn-dark btn-sm" type="button" routerLinkActive="active" routerLink="/productDetails" (click)="modifyProductDtoIdInService(product.id)">Details</button>
                     <button class="btn btn-outline-dark btn-sm mt-2" (click)="onAddToCart(product.id)" type="button">Add to Cart</button></div>
               </div>
           </div>

@@ -1,4 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ProductDto } from 'src/app/dto/product-dto';
+import { ProductDtoService } from 'src/app/services/product-dto.service';
 
 @Component({
   selector: 'app-product-dto-details',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductDtoDetailsComponent implements OnInit {
 
-  constructor() { }
+  public productDto: ProductDto;
+
+  constructor(private productDtoService: ProductDtoService) { }
 
   ngOnInit(): void {
+    this.getProductDtoById();
   }
 
+  public getProductDtoById() {
+    this.productDtoService.getProductById(this.productDtoService.getProductDtoId()).subscribe({
+      next:(response: ProductDto)=>{
+        this.productDto=response;
+        console.log(response);
+      },
+      error: (errorResponse: HttpErrorResponse) =>{
+        console.log(errorResponse);
+      }
+    })
+  }
 }
