@@ -1,4 +1,3 @@
-
 <div class="container" style="margin-left:0;" >
   <div class="row">
   <div class="col-md-2">
@@ -9,17 +8,14 @@
    </form>
    <br>
    
-   
    <div class="list-group" id="list-tab" role="tablist" >
     <h4>Categories: </h4>
-    <a class="list-group-item list-group-item-action list-group-item-dark" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Spices</a>
-    <a class="list-group-item list-group-item-action list-group-item-dark" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Dried Fruits</a>
-    <a class="list-group-item list-group-item-action list-group-item-dark" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Peanuts / Nuts / Seeds</a>
-    <a class="list-group-item list-group-item-action list-group-item-dark" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Cereals</a>
+    <button class="list-group-item list-group-item-action list-group-item-dark" (click)="getAllProducts()">All Products</button>
+    <button class="list-group-item list-group-item-action list-group-item-dark" *ngFor="let category of categories"  (click)="saveCategoryId(category.id)" (click)="callAppropriateGetMethod()" >{{category.name}}</button>
   </div>
   </div>
 
-  <div class="col-md-10">
+  <div class="col-md-9">
   <div class="d-flex justify-content-right row">
     <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
       <input type="search"  id="searchName" class="form-control form-control-dark text-bg-dark" placeholder="Search product..." required>
@@ -45,7 +41,7 @@
                   </div>
                   <h6 class="text-success">Free shipping</h6>
                   <div class="d-flex flex-column mt-3">
-                    <button class="btn btn-dark btn-sm" type="button" routerLinkActive="active" routerLink="/productDetails" (click)="modifyProductDtoIdInService(product.id)">Details</button>
+                    <button class="btn btn-dark btn-sm" type="button" routerLinkActive="active" routerLink="/productDetails" (click)="saveProductDtoId(product.id)">Details</button>
                     <button class="btn btn-outline-dark btn-sm mt-2" (click)="onAddToCart(product.id)" type="button">Add to Cart</button></div>
               </div>
           </div>

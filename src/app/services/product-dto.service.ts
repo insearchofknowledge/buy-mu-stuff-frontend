@@ -10,16 +10,20 @@ import { Form } from '@angular/forms';
 })
 export class ProductDtoService {
 
-
   private apiServerUrl = environment.apiBaseUrl;
   private productDtoId: number;
+  private categoryId: number;
   constructor(private httpClient: HttpClient) { }
 
   public getProductById(productDtoId: number): Observable<ProductDto> {
     return this.httpClient.get<ProductDto>(`${this.apiServerUrl}/api/products/${productDtoId}`);
   }
 
-  public getProducts(): Observable<ProductDto[]> {
+  public getProductsByCategory(categoryId:number): Observable<ProductDto[]>{
+    return this.httpClient.get<ProductDto[]>(`${this.apiServerUrl}/api/products/byCategories/${categoryId}`);
+  }
+
+  public getAllProducts(): Observable<ProductDto[]> {
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json; charset=utf-8');
     return this.httpClient.get<ProductDto[]>('/api/products', { headers: headers });
@@ -37,11 +41,18 @@ export class ProductDtoService {
     return this.httpClient.delete<void>(`${this.apiServerUrl}/api/products/${productDtoId}`);
   }
 
-  public setProductDtoId(incomingId: number) {
-    this.productDtoId = incomingId;
+  public setProductDtoId(incomingProductDtoId: number) {
+    this.productDtoId = incomingProductDtoId;
   }
 
   public getProductDtoId(): number {
     return this.productDtoId;
+  }
+
+  public setCategoryId(incomingCategoryId: number) {
+    this.categoryId = incomingCategoryId;
+  }
+  public getCategoryId(): number {
+    return this.categoryId;
   }
 }

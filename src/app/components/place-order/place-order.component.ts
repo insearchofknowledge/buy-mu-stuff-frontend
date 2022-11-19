@@ -1,8 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { OrderDto } from 'src/app/dto/order-dto';
 import { User } from 'src/app/dto/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { OrderService } from 'src/app/services/order.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -15,10 +17,15 @@ export class PlaceOrderComponent implements OnInit {
 
   public currentUser: User;
   public orderForm: FormGroup;
-  public userId: number = 1;
+  public userId: number = this.authService.getUserFromCache().id;
 
 
-  constructor(private userService: UserService, private orderService: OrderService) { }
+  constructor(
+    private userService: UserService, 
+    private orderService: OrderService,
+    private authService: AuthService,
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.createOrderForm();
@@ -39,19 +46,16 @@ export class PlaceOrderComponent implements OnInit {
   }
 
   public getUserById(userId: number) {
-    console.log("getUserById called, here goes nothing.... :D")
     this.userService.getUserById(userId).subscribe({
       next: (response: User) => {
-        console.log("printing the response:")
-        console.log(response);
         this.orderForm.setValue({
           county: response.county,
           city: response.city,
           street: response.street,
           zipCode: response.zipCode,
           phoneNumber: response.phoneNumber,
-          user: 1, // hardcoded
-          additionalInformation: ''
+          user: this.userId,
+          additionalInformation: ('')
         })
         console.log("trying to print populatedForm...")
         console.log(this.orderForm.value);
@@ -68,6 +72,9 @@ export class PlaceOrderComponent implements OnInit {
       next: (response: OrderDto) =>{
         console.log(response);
         
+        this.router.navigateByUrl('/thankYou').then(()=>{
+          window.location.reload();
+        });
       },
       error:(errorResponse: HttpErrorResponse)=>{
         console.log(errorResponse);

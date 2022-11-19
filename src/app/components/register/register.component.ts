@@ -45,8 +45,8 @@ export class RegisterComponent implements OnInit {
     })
   }
 
+  // For displaying / hiding password
   public changeFieldTextType() {
-    console.log("changeFieldTextType called....")
     this.fieldTextType = !this.fieldTextType;
   }
 

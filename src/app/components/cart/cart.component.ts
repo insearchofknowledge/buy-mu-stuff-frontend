@@ -2,6 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { OrderLineDto } from 'src/app/dto/order-line-dto';
+import { User } from 'src/app/dto/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { OrderLineDtoService } from 'src/app/services/order-line-dto.service';
 
 @Component({
@@ -11,25 +13,39 @@ import { OrderLineDtoService } from 'src/app/services/order-line-dto.service';
 })
 export class CartComponent implements OnInit {
 
-  public orderLines: OrderLineDto[];
+  public orderLines: OrderLineDto[] = [];
   public totalCost: number = 0;
   public updateQuantityForm: FormGroup;
   public currentOrderLine: OrderLineDto;
   public currentOrderLineId: number;
   public numberOfItemsIncart: number;
+  public isCartEmpty: boolean = false;
+  public user: User;
 
-  constructor(private orderLineDtoService: OrderLineDtoService) { }
+  constructor(
+    private orderLineDtoService: OrderLineDtoService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
+    this.getUser();
     this.getOrderLines();
+    //  this.checkIfCartIsEmpty();
     this.createUpdateQuantityForm();
     this.getTotalCost();
+  
+  }
+
+  public getUser() {
+    this.user = this.authService.getUserFromCache();
   }
 
   public getOrderLines(): void {
-    this.orderLineDtoService.getUserSpecificOrderLines(1)    // HARDCODED NEEDS TO BE CHANGED !!!!
+    console.log(this.user);
+    this.orderLineDtoService.getUserSpecificOrderLines(this.user.id)    // HARDCODED NEEDS TO BE CHANGED !!!!
       .subscribe((response: OrderLineDto[]): void => {
         this.orderLines = response;
+        this.checkIfCartIsEmpty(response);
       },
         (error: HttpErrorResponse) => {
           alert(error.message)
@@ -37,9 +53,15 @@ export class CartComponent implements OnInit {
       );
   }
 
-  public getTotalCost() {
+  public checkIfCartIsEmpty(orderLineList: OrderLineDto[]): void {
+    if (orderLineList.length == 0) {
+      this.isCartEmpty = true;
+    }
+  }
+
+  public getTotalCost(): void {
     let sum: number = 0;  // IF NOT INITIALIZED IT WILL BE NaN
-    this.orderLineDtoService.getUserSpecificOrderLines(1).subscribe({   // HARDCODED STUFF 
+    this.orderLineDtoService.getUserSpecificOrderLines(this.user.id).subscribe({   // HARDCODED STUFF 
       next: (response: OrderLineDto[]) => {
         response.forEach((item) => {
           sum += item.totalPrice;

@@ -18,13 +18,15 @@ import { AllProductsComponent } from './components/all-products/all-products.com
 import { CartComponent } from './components/cart/cart.component';
 import { PlaceOrderComponent } from './components/place-order/place-order.component';
 import { ProductDtoDetailsComponent } from './components/product-dto-details/product-dto-details.component';
+import { AuthInterCeptor } from './interceptors/auth-interceptor';
+import { ThankYouComponent } from './components/thank-you/thank-you.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
 
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
-    const xhr = req.clone({
-      headers: req.headers.set('X-Requested-With', 'XMLHttpRequest')
+  intercept(request: HttpRequest<any>, next: HttpHandler) {
+    const xhr = request.clone({
+      headers: request.headers.set('X-Requested-With', 'XMLHttpRequest')
     });
     return next.handle(xhr);
   }
@@ -41,7 +43,8 @@ export class XhrInterceptor implements HttpInterceptor {
     AllProductsComponent,
     CartComponent,
     PlaceOrderComponent,
-    ProductDtoDetailsComponent
+    ProductDtoDetailsComponent,
+    ThankYouComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,13 @@ export class XhrInterceptor implements HttpInterceptor {
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ProductDtoService, AppService, UserService, { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }],
+  providers: [
+    ProductDtoService, 
+    AppService, 
+    UserService, 
+    { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }, 
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterCeptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

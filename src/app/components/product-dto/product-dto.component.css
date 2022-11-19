@@ -1,1 +1,17 @@
 @import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css';
+
+.description {
+    width: 15%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.description:hover {
+    overflow: visible;
+    white-space: normal;
+}
+
+#productType>option[value=""] {
+    visibility: hidden;
+}
