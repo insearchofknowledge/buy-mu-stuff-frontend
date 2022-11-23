@@ -73,9 +73,9 @@ export class PlaceOrderComponent implements OnInit {
       next: (response: OrderDto) =>{
         console.log(response);
         
-        // this.router.navigateByUrl('/thankYou').then(()=>{
-        //   window.location.reload();
-        // });
+        this.router.navigateByUrl('/thankYou').then(()=>{
+          window.location.reload();
+        });
       },
       error:(errorResponse: HttpErrorResponse)=>{
         console.log(errorResponse);
