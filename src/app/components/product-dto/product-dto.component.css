@@ -1,6 +1,7 @@
 @import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css';
 
-.description {
+/* commented since it ruins the responsiveness.... */
+/* .description {
     width: 15%;
     white-space: nowrap;
     overflow: hidden;
@@ -14,4 +15,4 @@
 
 #productType>option[value=""] {
     visibility: hidden;
-}
+} */

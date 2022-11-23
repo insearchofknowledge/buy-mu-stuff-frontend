@@ -1,7 +1,7 @@
 <div>
-<h2>One final step: </h2>
-<h3>Where would you like the package to be delivered?</h3>
-<br>
+    <h2>One final step: </h2>
+    <h3>Where would you like the package to be delivered?</h3>
+    <br>
 </div>
 
 <form action="" [formGroup]="orderForm" (ngSubmit)="placeOrder()" class="form-signin" style="width:auto; margin:auto;">
@@ -31,9 +31,11 @@
         <label class="form-label">Phone</label>
         <input formControlName="phoneNumber" type="text" id="form6Example6" class="form-control" />
     </div>
+
     <div class="form-outline mb-4 col-md-4">
-        <label class="form-label" for="form6Example7">Additional information</label>
-        <textarea formControlname="additionalInformation" class="form-control" id="form6Example7" rows="3"></textarea>
+        <label class="form-label">Additional information</label>
+        <textarea formControlName="additionalInformation" type="text" class="form-control" id="form6Example7"
+            rows="3"></textarea>
     </div>
     <button type="submit" class="btn btn-dark btn-block mb-4">Place order</button>
 </form>

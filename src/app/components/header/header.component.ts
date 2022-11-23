@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { OrderLineDto } from 'src/app/dto/order-line-dto';
 import { ProductDto } from 'src/app/dto/product-dto';
 import { User } from 'src/app/dto/user';
+import { Role } from 'src/app/enums/role';
 import { AuthService } from 'src/app/services/auth.service';
 import { OrderLineDtoService } from 'src/app/services/order-line-dto.service';
 import { ProductDtoService } from 'src/app/services/product-dto.service';
@@ -21,6 +22,8 @@ export class HeaderComponent implements OnInit {
   public cartHasItems: boolean = false;
   public user: User;
   public isAuthenticated = false;
+  public role: Role;
+  public isUserAdmin = false;
 
   constructor(
     private productDtoService: ProductDtoService,
@@ -37,9 +40,17 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log(this.isUserAdmin);
     this.getAuthUser();
     console.log(this.isAuthenticated);
     this.getNumberOfCartItems();
+    this.user = this.authService.getUserFromCache();
+    this.role = this.user.role;
+    this.checkIfUserIsAdmin();
+    console.log(this.user);
+    console.log(this.role);
+    console.log(this.isUserAdmin);
+
     // this.numberOfCartItems = this.orderLineDtoService.getNumberOfItems();
     // this.getProducts();
     this.cartHasItems = false;
@@ -49,14 +60,21 @@ export class HeaderComponent implements OnInit {
     // if(this.isAuthenticated){
     //   this.user = this.authService.getUserFromCache();
     // }
-    if(this.authService.isUserLoggedin()){
+    if (this.authService.isUserLoggedin()) {
       this.user = this.authService.getUserFromCache();
       this.isAuthenticated = true;
-    }else{
+    } else {
       this.isAuthenticated = false;
     }
   }
- 
+
+  checkIfUserIsAdmin() {
+    console.log(this.role)
+    if (this.role.toString() == "ADMIN") {
+      this.isUserAdmin = true;
+    }
+  }
+
   public getNumberOfCartItems() {
     let length: number = 0;
     this.orderLineDtoService.getUserSpecificOrderLines(this.user.id).subscribe({
@@ -69,10 +87,10 @@ export class HeaderComponent implements OnInit {
       }
     })
   }
-  
-  public logout(){
+
+  public logout() {
     this.authService.logout(new HttpHeaders);
-    this.router.navigateByUrl('/allProducts').then(()=>{
+    this.router.navigateByUrl('/allProducts').then(() => {
       window.location.reload();
     });
   }

@@ -12,7 +12,7 @@
             class="d-inline-block align-top"></li>
         <li><a href="#" class="nav-link px-2 text-secondary" routerLinkActive="active" routerLink="/home">Home</a></li>
         <li><a href="#" class="nav-link px-2 text-white">About</a></li>
-        <li><a href="#" class="nav-link px-2 text-white" routerLinkActive="active" routerLink="/products">Products
+        <li *ngIf="isUserAdmin"><a href="#" class="nav-link px-2 text-white" routerLinkActive="active" routerLink="/products">Products
             Admin</a></li>
         <li><a href="#" class="nav-link px-2 text-white" routerLinkActive="active"
             routerLink="/allProducts">Products</a></li>
@@ -25,11 +25,11 @@
       <div *ngIf="isAuthenticated" class="col-3 col-lg-auto mb-3 mb-lg-0 me-lg-4"> <span>Welcome
           {{user.firstName}}</span></div>
 
-      <div>
+      <div *ngIf="isAuthenticated">
         <a routerLinkActive="active" class="text-bg-dark" routerLink="/cart"><i class="fa"><i
               class="fa fa-shopping-cart fa-lg fa-2x"></i></i></a>
         <span *ngIf="numberOfCartItems>0" class='badge badge-warning' id='lblCartCount'>{{numberOfCartItems}}
-          <!-- need to fix this-->
+          <!-- need to fix this  UPDATE: I think it is fixed-->
         </span>
       </div>
       <!-- <i class="fa badge nav-link "  style="font-size:large" value=5 ><i class="fa fa-shopping-cart fa-lg fa-2x"></i></i> -->

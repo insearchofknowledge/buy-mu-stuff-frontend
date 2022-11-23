@@ -31,7 +31,7 @@
   </table>
 
 
-  <form action="" [formGroup]="addProductForm" (ngSubmit)="onSubmit()" class="row g-4 needs-validation" validate>
+  <form action="" id="addForm" [formGroup]="addProductForm" (ngSubmit)="onSubmit()" class="row g-4 needs-validation" validate>
     <div class="col-md-2">
       <label for="name" class="form-label">Name</label>
       <input formControlName="name" type="text" class="form-control" id="name" required>
@@ -62,8 +62,11 @@
       <div class="dropdown ">
         <select id="productType" formControlName="productType" class="btn dropdown-toggle"
           style="background-color: white; width:100%" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <option *ngFor="let enum of productType|keyvalue" value="{{enum.key}}" class="dropdown-item">{{enum.value}}
-          </option>
+          <!-- <option *ngFor="let enum of productType|keyvalue" value="{{enum.key}}" class="dropdown-item">{{enum.value}}
+          </option> -->
+          <option *ngFor="let item of getPriority" value = "{{item.value}}" class="dropdown-item"> {{item.key}} </option>
+
+
         </select>
       </div>
     </div>

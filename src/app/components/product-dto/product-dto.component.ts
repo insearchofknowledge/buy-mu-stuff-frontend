@@ -20,7 +20,7 @@ export class ProductDtoComponent implements OnInit {
   public categories: CategoryDto[];
   public producers: ProducerDto[];
   public productType = ProductType;
- // public productTypes = ProductType[ProductType.HANDS, ProductType.HEAD, ProductType.LEGS, ProductType.UPPER_BODY];
+ // public productTypes = ProductType[ProductType.COARSE, ProductType.FLAKES, ProductType.GRANULES, ProductType.POWDER, ProductType.WHOLE];
   public addProductForm: FormGroup;
   public addProducerForm: FormGroup;
   public addCategoryForm: FormGroup;
@@ -37,6 +37,7 @@ export class ProductDtoComponent implements OnInit {
   public editProductMode: boolean = false;
   public editProducerMode: boolean = false;
   public editCategoryMode: boolean = false;
+  public getPriority:any;
 
   constructor(private formBuilder: FormBuilder, private productDtoService: ProductDtoService, private categoryDtoService: CategoryDtoService, private producerDtoService: ProducerDtoService) { }
 
@@ -47,14 +48,23 @@ export class ProductDtoComponent implements OnInit {
     this.createForm();
     this.createProducerForm();
     this.createCategoryForm();
-    // this.splitProductTypesInTwo();
+    this.getPriority = this.getENUM(ProductType);
+
   }
-  // public splitProductTypesInTwo() {
-  //   let half: number = Math.ceil(this.productTypes.length / 2);
-  //   const firtsHalf =this.productTypes.slice(0,half);
-  //   this.productTypes=firtsHalf;
-  //   console.log(firtsHalf);
-  // }
+
+  // Split the types dropdown list in 2 
+  getENUM(ENUM:any): string[] {
+    let myEnum = [];
+    let objectEnum = Object.keys(ENUM);
+    const values = objectEnum.slice( 0 , objectEnum.length / 2 );
+    const keys = objectEnum.slice( objectEnum.length / 2 );
+
+    for (let i = 0 ; i < objectEnum.length/2 ; i++ ) {
+      myEnum.push( { key: keys[i], value: values[i] } ); 
+    }
+    return myEnum;
+  }
+
 
   // ========== PRODUCTS ==========
 
@@ -63,7 +73,7 @@ export class ProductDtoComponent implements OnInit {
     //Select File
     this.selectedFile = event.target.files[0];
   }
-
+  
   public createForm(): void {
     this.addProductForm = new FormGroup({
       name: new FormControl(''),
@@ -151,8 +161,16 @@ export class ProductDtoComponent implements OnInit {
       description: this.currentProduct.description,
       price: this.currentProduct.price,
       productType: this.currentProduct.productType,
-      categoryDto: this.currentProduct.categoryDto.id,
+      categoryDto: this.currentProduct.categoryDto.id
     });
+
+    // Jump to the edit form
+    document.getElementById("addForm").scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest"
+      });
+      
 
     //Change the button value to Update product:
     this.editProductMode = true;

@@ -48,7 +48,7 @@ export class CartComponent implements OnInit {
         this.checkIfCartIsEmpty(response);
       },
         (error: HttpErrorResponse) => {
-          alert(error.message)
+          alert("Cart is empty")
         }
       );
   }

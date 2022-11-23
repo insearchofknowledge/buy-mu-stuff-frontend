@@ -68,13 +68,14 @@ export class PlaceOrderComponent implements OnInit {
 
   public placeOrder():void{
     console.log("place order button presse place order called...")
+    console.log(this.orderForm.value);
     this.orderService.addOrder(this.orderForm.value).subscribe({
       next: (response: OrderDto) =>{
         console.log(response);
         
-        this.router.navigateByUrl('/thankYou').then(()=>{
-          window.location.reload();
-        });
+        // this.router.navigateByUrl('/thankYou').then(()=>{
+        //   window.location.reload();
+        // });
       },
       error:(errorResponse: HttpErrorResponse)=>{
         console.log(errorResponse);
