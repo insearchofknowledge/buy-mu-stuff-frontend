@@ -25,6 +25,7 @@ export class AllProductsComponent implements OnInit {
   public addOrderLineForm: FormGroup;
   public categories: CategoryDto[];
   public user: User;
+  public isAuthenticated = false;
 
   constructor(
     private categoryDtoService: CategoryDtoService, 
@@ -39,6 +40,7 @@ export class AllProductsComponent implements OnInit {
     this.getCategories();
     this.callAppropriateGetMethod();
     this.createOrderLineForm();
+    this.getAuthUser();
     
   }
 
@@ -152,6 +154,11 @@ export class AllProductsComponent implements OnInit {
   }
 
   public onAddToCart(productDtoId: number) {
+
+    if(this.isAuthenticated ==false){
+      this.router.navigate(['/login']);
+    }else{
+
     // Populate the form with the orderLine details:
     this.addOrderLineForm.setValue({
       quantity: 1,
@@ -171,10 +178,24 @@ export class AllProductsComponent implements OnInit {
       error: (errorResponse: HttpErrorResponse) => {
         console.log(errorResponse);
       }
-    })
+    })}
   }
 
   // ========== End of orderline creating methods ==========
+
+
+  public getAuthUser() {
+    // if(this.isAuthenticated){
+    //   this.user = this.authService.getUserFromCache();
+    // }
+    if (this.authService.isUserLoggedin()) {
+      this.user = this.authService.getUserFromCache();
+      this.isAuthenticated = true;
+    } else {
+      this.isAuthenticated = false;
+    }
+  }
+
 
   // public reloadCurrentRoute() {
   //   let currentUrl = this.router.url;

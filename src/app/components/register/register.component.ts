@@ -37,12 +37,12 @@ export class RegisterComponent implements OnInit {
     this.userService.register(this.registerForm.value).subscribe({
       next: (response: string) => {
         console.log(response);
-        this.router.navigateByUrl('/login');
       },
       error: (errorResponse: HttpErrorResponse) => {
         console.log(errorResponse);
       }
     })
+    this.router.navigate(['/login']);
   }
 
   // For displaying / hiding password
