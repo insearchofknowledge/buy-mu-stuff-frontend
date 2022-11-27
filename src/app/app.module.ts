@@ -20,6 +20,7 @@ import { PlaceOrderComponent } from './components/place-order/place-order.compon
 import { ProductDtoDetailsComponent } from './components/product-dto-details/product-dto-details.component';
 import { AuthInterCeptor } from './interceptors/auth-interceptor';
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
+import { AboutComponent } from './components/about/about.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -44,7 +45,8 @@ export class XhrInterceptor implements HttpInterceptor {
     CartComponent,
     PlaceOrderComponent,
     ProductDtoDetailsComponent,
-    ThankYouComponent
+    ThankYouComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
