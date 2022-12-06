@@ -21,6 +21,7 @@ import { ProductDtoDetailsComponent } from './components/product-dto-details/pro
 import { AuthInterCeptor } from './interceptors/auth-interceptor';
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { AboutComponent } from './components/about/about.component';
+import { OrderDtoComponent } from './components/order-dto/order-dto.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -46,14 +47,15 @@ export class XhrInterceptor implements HttpInterceptor {
     PlaceOrderComponent,
     ProductDtoDetailsComponent,
     ThankYouComponent,
-    AboutComponent
+    AboutComponent,
+    OrderDtoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     ProductDtoService, 

@@ -23,7 +23,8 @@
           placeholder="Search product..." required>
       </form> -->
       <div *ngIf="isAuthenticated" class="col-3 col-lg-auto mb-3 mb-lg-0 me-lg-4"> <span>Welcome
-          {{user.firstName}}</span></div>
+          {{user.firstName}}</span>
+      </div>
 
       <div *ngIf="isAuthenticated">
         <a routerLinkActive="active" class="text-bg-dark" routerLink="/cart"><i class="fa"><i
@@ -32,10 +33,14 @@
           <!-- need to fix this  UPDATE: I think it is fixed-->
         </span>
       </div>
+      &nbsp; &nbsp; 
+      <div *ngIf="isAuthenticated">
+        <button type="button" class="btn btn-outline-light" routerLinkActive="active" routerLink="/order">My Orders </button>
+      </div>
       <!-- <i class="fa badge nav-link "  style="font-size:large" value=5 ><i class="fa fa-shopping-cart fa-lg fa-2x"></i></i> -->
       <!-- <a href="#" class="nav-link px-2 text-white" routerLinkActive="active" routerLink="/cart"><i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i></a> -->
 
-      &nbsp; &nbsp;
+      &nbsp; &nbsp; 
       <div class="text-end">
         <button *ngIf="!this.isAuthenticated" type="button" class="btn btn-outline-light me-2" routerLinkActive="active"
           routerLink="/login">Login</button>

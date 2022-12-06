@@ -1,0 +1,73 @@
+<h2><b>My Orders:</b></h2>
+<br>
+<table class="table" style="width:85%">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Purchase Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Total Cost</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Delivery Address</th>
+            <th scope="col">Additional Information</th>
+            <th scope="col">Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let order of orders">
+            <th>{{order.id}}</th>
+            <td>{{order.orderDate}}</td>
+            <td>{{order.orderStatus}}</td>
+            <td>${{order.totalCost.toFixed(2)}}</td>
+            <td>{{order.phoneNumber}}</td>
+            <td>{{order.county}}, {{order.city}}, {{order.street}}, {{order.zipCode}}</td>
+            <td>{{order.additionalInformation}}</td>
+            <td><button class="btn fa fa-database fa-lg" aria-label="Edit" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="getOrderLinesByOrderId(order.id)"></button></td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Button trigger modal
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Launch static backdrop modal
+  </button> -->
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Order Details</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let orderLine of orderLines">
+                        <th scope="row">{{orderLine.id}}</th>
+                        <th scope="row">{{orderLine.productDto.name}}</th>
+                        <th scope="row"><img src='data:image/jpeg;base64,{{orderLine.productDto.imageFile}}' class="img-fluid rounded-3"
+                            alt="Product image" style="height:45px; width:65px"></th>
+                        <th scope="row">${{orderLine.productDto.price}}</th>
+                        <th scope="row" style="text-align:justified">x {{orderLine.quantity}}</th>
+                        <th scope="row">${{orderLine.totalPrice}}</th>    
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

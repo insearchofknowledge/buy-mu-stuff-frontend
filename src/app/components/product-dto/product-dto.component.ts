@@ -20,7 +20,7 @@ export class ProductDtoComponent implements OnInit {
   public categories: CategoryDto[];
   public producers: ProducerDto[];
   public productType = ProductType;
- // public productTypes = ProductType[ProductType.COARSE, ProductType.FLAKES, ProductType.GRANULES, ProductType.POWDER, ProductType.WHOLE];
+  // public productTypes = ProductType[ProductType.COARSE, ProductType.FLAKES, ProductType.GRANULES, ProductType.POWDER, ProductType.WHOLE];
   public addProductForm: FormGroup;
   public addProducerForm: FormGroup;
   public addCategoryForm: FormGroup;
@@ -37,7 +37,7 @@ export class ProductDtoComponent implements OnInit {
   public editProductMode: boolean = false;
   public editProducerMode: boolean = false;
   public editCategoryMode: boolean = false;
-  public getPriority:any;
+  public getPriority: any;
 
   constructor(private formBuilder: FormBuilder, private productDtoService: ProductDtoService, private categoryDtoService: CategoryDtoService, private producerDtoService: ProducerDtoService) { }
 
@@ -53,14 +53,14 @@ export class ProductDtoComponent implements OnInit {
   }
 
   // Split the types dropdown list in 2 
-  getENUM(ENUM:any): string[] {
+  getENUM(ENUM: any): string[] {
     let myEnum = [];
     let objectEnum = Object.keys(ENUM);
-    const values = objectEnum.slice( 0 , objectEnum.length / 2 );
-    const keys = objectEnum.slice( objectEnum.length / 2 );
+    const values = objectEnum.slice(0, objectEnum.length / 2);
+    const keys = objectEnum.slice(objectEnum.length / 2);
 
-    for (let i = 0 ; i < objectEnum.length/2 ; i++ ) {
-      myEnum.push( { key: keys[i], value: values[i] } ); 
+    for (let i = 0; i < objectEnum.length / 2; i++) {
+      myEnum.push({ key: keys[i], value: values[i] });
     }
     return myEnum;
   }
@@ -73,7 +73,7 @@ export class ProductDtoComponent implements OnInit {
     //Select File
     this.selectedFile = event.target.files[0];
   }
-  
+
   public createForm(): void {
     this.addProductForm = new FormGroup({
       name: new FormControl(''),
@@ -86,12 +86,14 @@ export class ProductDtoComponent implements OnInit {
   }
 
   public getAllProducts(): void {
-    this.productDtoService.getAllProducts()
-      .subscribe((response: ProductDto[]) => { this.products = response; },
-        (error: HttpErrorResponse) => {
-          alert(error.message)
-        }
-      );
+    this.productDtoService.getAllProducts().subscribe({
+      next: (response: ProductDto[]) => {
+        this.products = response
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        alert(errorResponse.message);
+      }
+    })
   }
 
   public onSubmit(): void {
@@ -169,24 +171,25 @@ export class ProductDtoComponent implements OnInit {
       behavior: "smooth",
       block: "start",
       inline: "nearest"
-      });
-      
+    });
+
 
     //Change the button value to Update product:
     this.editProductMode = true;
   }
 
   public onDeleteProduct(productDtoId: number): void {
-    if(confirm('Delete product ?')){
-    this.productDtoService.deleteProduct(productDtoId).subscribe(
-      (response: void) => {
-        console.log(response);
-        this.getAllProducts();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );}
+    if (confirm('Delete product ?')) {
+      this.productDtoService.deleteProduct(productDtoId).subscribe(
+        (response: void) => {
+          console.log(response);
+          this.getAllProducts();
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
+    }
   }
   // ========== END OF PRODUCTS ==========
 

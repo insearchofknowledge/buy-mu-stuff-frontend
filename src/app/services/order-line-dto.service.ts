@@ -28,6 +28,10 @@ export class OrderLineDtoService {
     return this.httpClient.get<OrderLineDto[]>(`${this.apiServerUrl}/api/orderLines/${userId}`, { headers: headers });
   }
 
+  public getOrderLinesByOrderId(orderId: number): Observable<OrderLineDto[]> {
+    return this.httpClient.get<OrderLineDto[]>(`${this.apiServerUrl}/api/orderLines/byOrder/${orderId}`);
+  }
+
   public addOrderLine(orderLine: OrderLineDto): Observable<OrderLineDto> {
     return this.httpClient.post<OrderLineDto>(`${this.apiServerUrl}/api/orderLines`, orderLine);
   }

@@ -1,6 +1,10 @@
-.middle{
+.middle {
     font-size: larger;
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 40%;
-    }
+}
+
+.hover-item:hover {
+    text-decoration: underline;
+}

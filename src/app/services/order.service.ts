@@ -15,4 +15,8 @@ export class OrderService {
   public addOrder(order: OrderDto): Observable<OrderDto> {
     return this.httpClient.post<OrderDto>(`${this.apiServerUrl}/api/orders`, order);
   }
+
+  public getOrdersByUserId(userId: number): Observable<OrderDto[]> {
+    return this.httpClient.get<OrderDto[]>(`${this.apiServerUrl}/api/orders/${userId}`);
+  }
 }

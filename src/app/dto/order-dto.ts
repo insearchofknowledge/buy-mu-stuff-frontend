@@ -8,9 +8,8 @@ export class OrderDto {
     street: string;
     zipCode: string;
     phoneNumber: string;
-    additionalInformtion: string;
+    additionalInformation: string;
     orderStatus: string;
     user: User;
     totalCost: number;
-
 }
